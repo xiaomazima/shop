@@ -64,4 +64,19 @@ class TestController extends Controller
 		var_dump($_POST);
 		var_dump($_GET);
 	}
+
+	public function mid1()
+	{
+		echo __METHOD__;
+	}
+
+	public function checkCookie()
+	{
+		echo __METHOD__;
+	}
+
+	public function phpInfo()
+	{
+		echo phpinfo();
+	}
 }

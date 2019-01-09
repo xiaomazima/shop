@@ -31,6 +31,7 @@ Route::get('/user/{uid}','User\UserController@user');
 Route::get('/month/{m}/date/{d}','Test\TestController@md');
 Route::get('/name/{str?}','Test\TestController@showName');
 
+Route::get('/phpInfo','Test\TestController@phpInfo');
 
 
 // View视图路由
@@ -52,4 +53,30 @@ Route::get('/date', function () {
 
 Route::get('/userList','User\UserController@userList');
 #注册页面
-Route::get('/register','User\UserController@register');
+Route::any('/register','User\UserController@register');
+Route::any('/registerDo','User\UserController@registerDo');
+
+#登录
+Route::any('/login','User\UserController@login');
+Route::any('/loginDo','User\UserController@loginDo');
+Route::any('/center','User\UserController@center');
+
+
+Route::any('/cookieTest1','User\UserController@cookieTest1');
+Route::any('/cookieTest2','User\UserController@cookieTest2');
+
+//测试中间件
+Route::get('/test/mid1','Test\TestController@mid1')->middleware('check.uid');        //中间件测试
+Route::get('/test/check_cookie','Test\TestController@checkCookie')->middleware('check.cookie');
+
+
+//购物车
+Route::get('/cart','Cart\IndexController@index')->middleware('check.login.token');//购物车页面
+//商品添加购物车
+Route::get('/add/{goods_id}','Cart\IndexController@add')->middleware('check.login.token');
+//商品删除
+Route::get('/del/{goods_id}','Cart\IndexController@del')->middleware('check.login.token');
+Route::get('/clist','Cart\IndexController@clist');//商品详情（自己）
+Route::get('/goodsList/{goods_id}','Goods\IndexController@goodsList');//商品详情
+//添加购物车
+Route::get('/cart/cartAdd}','Cart\IndexController@cartAdd')->middleware('check.login.token');

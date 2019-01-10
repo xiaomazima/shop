@@ -85,3 +85,6 @@ Route::get('/cartDel/{goods_id}','Cart\IndexController@cartDel')->middleware('ch
 //下单
 Route::get('/orderAdd','Order\IndexController@orderAdd');
 Route::get('/orderList','Order\IndexController@orderList');
+
+//结算
+Route::any('/orderPay/{id}','Order\IndexController@orderPay')->middleware('check.login.token');

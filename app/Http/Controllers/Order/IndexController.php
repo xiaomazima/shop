@@ -45,7 +45,8 @@ class IndexController extends Controller
             'u_id'           => session()->get('uid'),
             'add_time'      => time(),
             'order_amount'  => $order_amount,
-            'status'      => 1
+            'is_pay'      => 1,
+            'is_delete'=>1
         ];
 
         $oid = OrderModel::insertGetId($data);
@@ -67,7 +68,12 @@ class IndexController extends Controller
      * 订单展示
      */
     public function orderList(){
-        $order_data=OrderModel::where(['u_id'=>session()->get('uid')])->get()->toArray();
+
+        $where=[
+          'is_delete'=>1 ,
+          'u_id'=>session()->get('uid')
+        ];
+        $order_data=OrderModel::where($where)->get()->toArray();
         if(empty($order_data)){
             die('没有订单，请去选择商品');
         }
@@ -76,4 +82,17 @@ class IndexController extends Controller
         return view('order.orderlist',['order_data'=>$order_data]);
     }
 
+
+    /**
+     * 结算
+     */
+    public function orderPay($id){
+        $where=[
+            'is_delete'=>1,
+             'is_pay'=>2,
+            'pay_time'
+        ];
+        $data=OrderModel::where(['id'=>$id,'u_id'=> session()->get('uid')])->update($where);
+        print_r($data);
+    }
 }

@@ -19,8 +19,8 @@
                     <td>{{$v['order_sn']}}</td>
                     <td>{{date('Y-m-d H:i:s',$v['add_time'])}}</td>
                     <td>￥{{$v['order_amount']/100}}</td>
-                    <td><a href="/cartDel">结算</a>
-                        <a href="/cartDel">取消订单</a>
+                    <td><a href="/cartPay/{{$v['id']}}" class="btn btn-info ">结算</a>
+                        <a href="/cartDel" class="btn btn-info" >取消订单</a>
                     </td>
                 </tr>
             @endforeach

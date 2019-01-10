@@ -7,7 +7,7 @@ $("#add_cart_btn").click(function(e){
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
-        url     :   '/cart/cartAdd',
+        url     :   '/cartAdd',
         type    :   'post',
         data    :   {goods_id:goods_id,num:num},
         dataType:   'json',

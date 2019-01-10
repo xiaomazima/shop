@@ -109,6 +109,7 @@ class UserController extends Controller
 				setcookie('token',$token,time()+86400,'','',false,true);
 
 				//$request->session()->put('u_token',$token);
+				$request->session()->put('uid',$data->id);
 				$request->session()->put('u_token',$token);
 				header("Refresh:3;url=/center");
 				echo "登录成功";
@@ -145,6 +146,7 @@ class UserController extends Controller
 			exit;
 		}else{
 			echo 'UID: '.$_COOKIE['uid'] . ' 欢迎回来';
+			header('Refresh:2;url=/clist');
 		}
 	}
 

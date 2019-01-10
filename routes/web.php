@@ -79,4 +79,9 @@ Route::get('/del/{goods_id}','Cart\IndexController@del')->middleware('check.logi
 Route::get('/clist','Cart\IndexController@clist');//商品详情（自己）
 Route::get('/goodsList/{goods_id}','Goods\IndexController@goodsList');//商品详情
 //添加购物车
-Route::get('/cart/cartAdd}','Cart\IndexController@cartAdd')->middleware('check.login.token');
+Route::post('/cartAdd','Cart\IndexController@cartAdd')->middleware('check.login.token');
+Route::get('/cartDel/{goods_id}','Cart\IndexController@cartDel')->middleware('check.login.token');
+
+//下单
+Route::get('/orderAdd','Order\IndexController@orderAdd');
+Route::get('/orderList','Order\IndexController@orderList');

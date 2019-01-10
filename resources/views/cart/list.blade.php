@@ -3,7 +3,7 @@
 @section('content')
     <form action="/userlogin" method="post" style="width: 600px; margin-left: 230px;">
         {{csrf_field()}}
-        <h2 class="form-signin-heading" style="padding-left: 240px;">List Show</h2>
+        <h2 class="form-signin-heading" style="padding-left: 240px;">商品 展示</h2>
         <table class="table table-bordered">
             <tr>
                 <td>商品ID</td>
@@ -17,8 +17,8 @@
                     <td>{{$v['goods_id']}}</td>
                     <td>{{$v['goods_name']}}</td>
                     <td>{{$v['store']}}</td>
-                    <td>{{$v['add_time']}}</td>
-                    <td><a href="/add/{{$v['goods_id']}}">加入购物车</a></td>
+                    <td>{{date('Y-m-d H:i:s',$v['add_time'])}}</td>
+                    <td><a href="/goodsList/{{$v['goods_id']}}">查看商品详情</a></td>
                 </tr>
             @endforeach
         </table>

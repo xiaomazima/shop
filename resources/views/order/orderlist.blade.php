@@ -1,0 +1,34 @@
+{{-- 购物车 --}}
+@extends('layouts.bootstrap')
+
+@section('content')
+    <form  method="post" style="width: 800px; margin-left: 230px;">
+        {{csrf_field()}}
+        <h2 class="form-signin-heading" style="padding-left: 240px;"> 订单页面</h2>
+        <table class="table table-bordered">
+            <tr>
+                <td>订单id</td>
+                <td>订单编号</td>
+                <td>购买时间</td>
+                <td>总金额</td>
+                <td>操作</td>
+            </tr>
+            @foreach($order_data as $v)
+                <tr>
+                    <td>{{$v['id']}}</td>
+                    <td>{{$v['order_sn']}}</td>
+                    <td>{{date('Y-m-d H:i:s',$v['add_time'])}}</td>
+                    <td>￥{{$v['order_amount']/100}}</td>
+                    <td><a href="/cartDel">结算</a>
+                        <a href="/cartDel">取消订单</a>
+                    </td>
+                </tr>
+            @endforeach
+        </table>
+    </form>
+
+@endsection
+
+@section('footer')
+    @parent
+@endsection

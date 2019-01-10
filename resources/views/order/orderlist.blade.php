@@ -19,8 +19,12 @@
                     <td>{{$v['order_sn']}}</td>
                     <td>{{date('Y-m-d H:i:s',$v['add_time'])}}</td>
                     <td>￥{{$v['order_amount']/100}}</td>
-                    <td><a href="/cartPay/{{$v['id']}}" class="btn btn-info ">结算</a>
-                        <a href="/cartDel" class="btn btn-info" >取消订单</a>
+                    <td>@if($v['is_pay']==1)
+                            <a href="/orderPay/{{$v['id']}}" class="btn btn-info ">结算</a>
+                        @elseif($v['is_pay']==2)
+                            <a href="" class="btn btn-success ">已结算|查看物流</a>
+                        @endif
+                        <a href="/orderDel/{{$v['id']}}" class="btn btn-info" >取消订单</a>
                     </td>
                 </tr>
             @endforeach

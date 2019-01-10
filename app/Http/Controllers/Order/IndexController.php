@@ -87,12 +87,43 @@ class IndexController extends Controller
      * 结算
      */
     public function orderPay($id){
+        //根据id 查是否有此订单
+        $order_res=OrderModel::where(['id'=>$id,'u_id'=> session()->get('uid')])->first();
+//        print_r($order_res);exit;
+        if(empty($order_res)){
+            echo '此订单不存在';
+            header("refresh:2;url='/orderList'");
+        }else{
+            $where=[
+                'is_pay'=>2,
+                'pay_time'=>time()
+            ];
+            $data=OrderModel::where(['id'=>$id,'u_id'=> session()->get('uid')])->update($where);
+//            var_dump($data);
+            if(empty($data)){
+                echo '支付失败';
+            }else{
+                echo '支付成功';
+                header("refresh:2;url='/orderList'");
+            }
+        }
+
+    }
+
+
+    /**
+     * 取消订单
+     */
+    public function orderDel($id){
+        //根据 id和uid删除订单  2已删除
         $where=[
-            'is_delete'=>1,
-             'is_pay'=>2,
-            'pay_time'
+            'is_delete'=>2,
+
         ];
-        $data=OrderModel::where(['id'=>$id,'u_id'=> session()->get('uid')])->update($where);
-        print_r($data);
+        $del=OrderModel::where(['id'=>$id,'u_id'=>session()->get('uid')])->update($where);
+        if($del){
+            echo '取消订单成功';
+            header("refresh:2; url='/orderList'");
+        }
     }
 }

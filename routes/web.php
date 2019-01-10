@@ -88,3 +88,4 @@ Route::get('/orderList','Order\IndexController@orderList');
 
 //结算
 Route::any('/orderPay/{id}','Order\IndexController@orderPay')->middleware('check.login.token');
+Route::any('/orderDel/{id}','Order\IndexController@orderDel')->middleware('check.login.token');

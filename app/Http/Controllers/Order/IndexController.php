@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Order;
 
 use App\Model\CartModel;
 use App\Model\GoodsModel;
+use App\Model\UserModel;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -96,6 +97,7 @@ class IndexController extends Controller
         }else{
             $where=[
                 'is_pay'=>2,
+                'pay_amount'=> mt_rand(100,999),
                 'pay_time'=>time()
             ];
             $data=OrderModel::where(['id'=>$id,'u_id'=> session()->get('uid')])->update($where);
@@ -104,6 +106,10 @@ class IndexController extends Controller
                 echo '支付失败';
             }else{
                 echo '支付成功';
+                //积分 累加
+                $user_int=UserModel::where(['id'=>session()->get('uid')])->value('integral');
+                $user_integral=$user_int+$where['pay_amount'];
+                UserModel::where(['id'=>session()->get('uid')])->update(['integral'=>$user_integral]);
                 header("refresh:2;url='/orderList'");
             }
         }

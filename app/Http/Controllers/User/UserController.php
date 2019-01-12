@@ -75,7 +75,7 @@ class UserController extends Controller
 
 		if($uid){
 			setcookie('uid',$uid,time()+86400,'/','shop.com',false,true);
-			header("Refresh:3;url=/center");
+			header("Refresh:3;url=/clist");
 			echo '注册成功,正在跳转';
 		}else{
 			echo '注册失败';

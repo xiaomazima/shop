@@ -14,7 +14,7 @@ class AlipayController extends Controller
 
     public $app_id = '2016091700535135';
     public $gate_way = 'https://openapi.alipaydev.com/gateway.do';
-    public $notify_url = 'http://118.89.239.232/1804/alipay/callback.php';
+    public $notify_url = 'http://xmz.rps0228.cn/pay/alipay/notify';
     public $rsaPrivateKeyFilePath = './key/priv.key';
 
 

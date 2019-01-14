@@ -62,7 +62,7 @@ class AlipayController extends Controller
         }
         $url = rtrim($param_str,'&');
         $url = $this->gate_way . $url;
-        echo $url;exit;
+//        echo $url;exit;
         header("Location:".$url);
     }
 

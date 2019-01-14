@@ -111,7 +111,7 @@ class UserController extends Controller
 				//$request->session()->put('u_token',$token);
 				$request->session()->put('uid',$data->id);
 				$request->session()->put('u_token',$token);
-				header("Refresh:3;url=/center");
+				header("Refresh:3;url=/clist");
 				echo "登录成功";
 			}else{
 				die("密码不正确");

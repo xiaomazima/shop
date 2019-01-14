@@ -12,11 +12,19 @@ class AlipayController extends Controller
     //
 
 
-    public $app_id = '2016091700535135';
-    public $gate_way = 'https://openapi.alipaydev.com/gateway.do';
-    public $notify_url = 'http://xmz.rps0228.cn/pay/alipay/notify';
+    public $app_id ;
+    public $gate_way ;
+    public $notify_url ;
     public $rsaPrivateKeyFilePath = './key/priv.key';
 
+
+    public function __construct()
+    {
+        $this->app_id=env('API_APP_ID');
+        $this->gate_way=env('API_GATE_WAY');
+        $this->notify_url=env('API_NOTIFY_URL');
+
+    }
 
     /**
      * 请求订单服务 处理订单逻辑

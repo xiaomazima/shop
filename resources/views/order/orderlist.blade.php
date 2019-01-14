@@ -20,7 +20,7 @@
                     <td>{{date('Y-m-d H:i:s',$v['add_time'])}}</td>
                     <td>￥{{$v['order_amount']/100}}</td>
                     <td>@if($v['is_pay']==1)
-                            <a href="/orderPay/{{$v['id']}}" class="btn btn-info ">结算</a>
+                            <a href="/pay/alipay/test" class="btn btn-info ">结算</a>
                         @elseif($v['is_pay']==2)
                             <a href="" class="btn btn-success ">已结算|查看物流</a>
                         @endif

@@ -307,7 +307,7 @@ class AlipayController extends Controller
     public function dealOrder($data)
     {
 
-
+            echo 111;
         //加积分
 
         //减库存

@@ -313,4 +313,27 @@ class AlipayController extends Controller
         //减库存
     }
 
+/**
+ * 删除所以失效的订单
+ */
+    public function orderDel()
+    {
+       $data=OrderModel::get()->toArray();
+//        print_r($data);exit;
+        foreach ($data as $k=>$v) {
+            if($v['is_pay']==1){
+                if(time()->$v['add_time']>300){
+                    $del =OrderModel::where(['id'=>$v['id']])->update(['is_delete'=>2]);
+                }
+            }
+        }
+
+        echo date('Y-m-d H:i:s')."执行 deleteOrders\n\n";
+    }
+
+
+
+
+
+
 }

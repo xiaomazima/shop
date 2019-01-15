@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Pay;
 
+use App\Model\OrderModel;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 

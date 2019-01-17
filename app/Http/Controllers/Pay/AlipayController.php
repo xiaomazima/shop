@@ -318,17 +318,17 @@ class AlipayController extends Controller
  */
     public function orderDel()
     {
-       $data=OrderModel::get()->toArray();
+       $data=OrderModel::get();
 //        print_r($data);exit;
         foreach ($data as $k=>$v) {
             if($v['is_pay']==1){
-                if(time()->$v['add_time']>300){
+                if(time()-$v['add_time']>30){
                     $del =OrderModel::where(['id'=>$v['id']])->update(['is_delete'=>2]);
                 }
             }
         }
 
-        echo date('Y-m-d H:i:s')."执行 deleteOrders\n\n";
+        echo date('Y-m-d H:i:s')."执行 orderDel\n\n";
     }
 
 

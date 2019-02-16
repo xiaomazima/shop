@@ -126,7 +126,7 @@ class GoodsController extends Controller
         $form->number('store', 'Store');
         $form->number('cat_id', 'Cat id');
         $form->number('price', 'Price');
-
+        $form->ckeditor('content');
         return $form;
     }
 }

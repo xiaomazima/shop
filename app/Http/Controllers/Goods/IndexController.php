@@ -24,4 +24,6 @@ class IndexController extends Controller
         return view('goods.index',['goods'=>$goods]);
 
     }
+
+
 }

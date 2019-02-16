@@ -6,6 +6,7 @@ use App\Model\CartModel;
 use App\Model\GoodsModel;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Input;
 
 class IndexController extends Controller
 {
@@ -194,9 +195,19 @@ class IndexController extends Controller
      * 展示
      */
         public function clist(){
-            $arr=GoodsModel::get()->toArray();
-            return view('cart.list',['arr'=>$arr]);
+            $list = GoodsModel::paginate(2);
+            return view('cart.list',['list'=>$list]);
 
         }
+    /**
+     * 搜索
+     */
+    public function goods_sou(Request $request){
+        $u_name=$request->input('goods_name');
+//        print_r($u_name);
+        $goods_page=GoodsModel::where('goods_name','like',"%{$u_name}%")->paginate(2);
+//        print_r($goods_page);exit;
+        return view('cart/goods',['goods_page'=> $goods_page]);
+    }
 
 }

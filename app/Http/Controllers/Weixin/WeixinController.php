@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Weixin;
 
+use App\Model\WeixinUser;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -31,12 +32,49 @@ class WeixinController extends Controller
         echo $_GET['echostr'];
     }
 
+
+
+
     /**
      * 接收微信服务器事件推送
      */
     public function wxEvent()
     {
         $data = file_get_contents("php://input");
+        //解析xml
+        $xml=simplexml_load_string($data); //将xml字符串转换成对象
+
+        $event=$xml->Event; //事件类型
+
+        if($event=='subscribe'){
+            $openid=$xml->FromUserName; //用户openid
+            $sub_time=$xml->CreateTime;//用户扫码关注时间
+
+            echo 'openid:'.$openid;echo '<br/>';
+            echo '$sub_time:'.$sub_time;
+
+            //根据openid 获取用户信息
+            $user_info=$this->getUserInfo($openid);
+            echo '<pre>';print_r($user_info);echo '</pre>';
+
+            //保存用户信息
+            $u=WeixinUser::where(['openid'=>$openid])->first();
+
+            if($u){
+                echo '用户已存在';
+            }else{
+                $user_data = [
+                    'openid'            => $openid,
+                    'add_time'          => time(),
+                    'nickname'          => $user_info['nickname'],
+                    'sex'               => $user_info['sex'],
+                    'headimgurl'        => $user_info['headimgurl'],
+                    'subscribe_time'    => $sub_time,
+                ];
+                $id = WeixinUser::insertGetId($user_data);      //保存用户信息
+                var_dump($id);
+            }
+        }
         $log_str = date('Y-m-d H:i:s') . "\n" . $data . "\n<<<<<<<";
         file_put_contents('logs/wx_event.log',$log_str,FILE_APPEND);
     }

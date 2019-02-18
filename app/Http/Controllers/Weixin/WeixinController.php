@@ -41,7 +41,7 @@ class WeixinController extends Controller
     public function wxEvent()
     {
         $data = file_get_contents("php://input");
-            var_dump($data);die;
+//            var_dump($data);die;
 
         //解析XML
         $xml = simplexml_load_string($data);        //将 xml字符串 转换成对象
@@ -62,23 +62,23 @@ class WeixinController extends Controller
             echo '<pre>';print_r($user_info);echo '</pre>';
 
             //保存用户信息
-            $u = WeixinUser::where(['openid'=>$openid])->first();
-            //var_dump($u);die;
-            if($u){       //用户不存在
-                echo '用户已存在';
-            }else{
-                $user_data = [
-                    'openid'            => $openid,
-                    'add_time'          => time(),
-                    'nickname'          => $user_info['nickname'],
-                    'sex'               => $user_info['sex'],
-                    'headimgurl'        => $user_info['headimgurl'],
-                    'subscribe_time'    => $sub_time,
-                ];
-
-                $id = WeixinUser::insertGetId($user_data);      //保存用户信息
-                var_dump($id);
-            }
+//            $u = WeixinUser::where(['openid'=>$openid])->first();
+//            //var_dump($u);die;
+//            if($u){       //用户不存在
+//                echo '用户已存在';
+//            }else{
+//                $user_data = [
+//                    'openid'            => $openid,
+//                    'add_time'          => time(),
+//                    'nickname'          => $user_info['nickname'],
+//                    'sex'               => $user_info['sex'],
+//                    'headimgurl'        => $user_info['headimgurl'],
+//                    'subscribe_time'    => $sub_time,
+//                ];
+//
+//                $id = WeixinUser::insertGetId($user_data);      //保存用户信息
+//                var_dump($id);
+//            }
         }
 
         $log_str = date('Y-m-d H:i:s') . "\n" . $data . "\n<<<<<<<";

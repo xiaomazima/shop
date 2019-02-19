@@ -167,7 +167,7 @@ class WeixinController extends Controller
                 ],[
                     "type"  => "view",      // view类型 跳转指定 URL
                     "name"  => "kefu01",
-                    "url"   => "kefu01"
+                    "key"   => "kefu01"
                 ]
             ]
         ];

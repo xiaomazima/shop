@@ -51,8 +51,6 @@ class WeixinController extends Controller
 //        var_dump($xml);echo '<hr>';die;
         $openid = $xml->FromUserName;               //用户openid
         if($event=='subscribe'){
-
-
             $sub_time = $xml->CreateTime;               //扫码关注时间
 
 
@@ -82,7 +80,7 @@ class WeixinController extends Controller
                 var_dump($id);
             }
         }elseif($event='CLICK'){
-            if($xml->EventKey=='jd'){
+            if($xml->EventKey=='kefu01'){
             $this->keFu($openid,$xml->ToUserName);
         }
     }
@@ -168,7 +166,7 @@ class WeixinController extends Controller
                     "url"   => "https://www.baidu.com"
                 ],[
                     "type"  => "view",      // view类型 跳转指定 URL
-                    "name"  => "jd",
+                    "name"  => "kefu01",
                     "url"   => "kefu01"
                 ]
             ]

@@ -154,18 +154,13 @@ class WeixinController extends Controller
         $data = [
             "button"    => [
                 [
-                    [
-                        "type"  => "view",      // view类型 跳转指定 URL
-                        "name"  => "xiaomai",
-                        "url"   => "https://www.baidu.com"
-                    ]
-                ],
-                [
-                    [
-                        "type"  => "view",      // view类型 跳转指定 URL
-                        "name"  =>"jingdong",
-                        "url"   => "https://www.jd.com"
-                    ]
+                    "type"  => "view",      // view类型 跳转指定 URL
+                    "name"  => "xiaomai",
+                    "url"   => "https://www.baidu.com"
+                ],[
+                    "type"  => "view",      // view类型 跳转指定 URL
+                    "name"  => "jd",
+                    "url"   => "https://www.jd.com"
                 ]
             ]
         ];

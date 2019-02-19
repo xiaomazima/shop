@@ -189,7 +189,8 @@ class WeixinController extends Controller
                             "type"=>"view",
                             "name"=>"哈哈哈❤",
                              "url"=>"http://www.soso.com/"
-                        ],[
+                        ],
+                        [
                             "type"=>"view",
                             "name"=>"嘻嘻嘻❤",
                             "url"=>"http://www.soso.com/"
@@ -201,7 +202,7 @@ class WeixinController extends Controller
 
 
         $r = $client->request('POST', $url, [
-            'body' => json_encode($data)
+            'body' => json_encode($data,JSON_UNESCAPED_UNICODE)
         ]);
 
         // 3 解析微信接口返回信息

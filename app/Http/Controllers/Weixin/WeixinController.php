@@ -165,7 +165,7 @@ class WeixinController extends Controller
                     "name"  => "xiaomai",
                     "url"   => "https://www.baidu.com"
                 ],[
-                    "type"  => "view",      // view类型 跳转指定 URL
+                    "type"  => "click",      // view类型 跳转指定 URL
                     "name"  => "kefu01",
                     "key"   => "kefu01"
                 ]

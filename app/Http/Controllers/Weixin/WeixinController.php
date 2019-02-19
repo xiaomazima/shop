@@ -154,9 +154,18 @@ class WeixinController extends Controller
         $data = [
             "button"    => [
                 [
-                    "type"  => "view",      // view类型 跳转指定 URL
-                    "name"  => "xiaomai",
-                    "url"   => "https://www.baidu.com"
+                    [
+                        "type"  => "view",      // view类型 跳转指定 URL
+                        "name"  => "xiaomai",
+                        "url"   => "https://www.baidu.com"
+                    ]
+                ],
+                [
+                    [
+                        "type"  => "view",      // view类型 跳转指定 URL
+                        "name"  =>"jingdong",
+                        "url"   => "https://www.jd.com"
+                    ]
                 ]
             ]
         ];
@@ -172,7 +181,7 @@ class WeixinController extends Controller
         //echo '<pre>';print_r($response_arr);echo '</pre>';
 
         if($response_arr['errcode'] == 0){
-            echo "菜单创建成功";
+            echo "小麻子您的菜单创建成功";
         }else{
             echo "菜单创建失败，请重试";echo '</br>';
             echo $response_arr['errmsg'];

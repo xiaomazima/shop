@@ -49,9 +49,9 @@ class WeixinController extends Controller
 
         $event = $xml->Event;                       //事件类型
 //        var_dump($xml);echo '<hr>';die;
-
+        $openid = $xml->FromUserName;               //用户openid
         if($event=='subscribe'){
-            $openid = $xml->FromUserName;               //用户openid
+
 
             $sub_time = $xml->CreateTime;               //扫码关注时间
 
@@ -81,14 +81,23 @@ class WeixinController extends Controller
                 $id = WeixinUser::insertGetId($user_data);      //保存用户信息
                 var_dump($id);
             }
+        }elseif($event='CLICK'){
+            if($xml->EventKey=='jd'){
+            $this->keFu($openid,$xml->ToUserName);
         }
+    }
 
         $log_str = date('Y-m-d H:i:s') . "\n" . $data . "\n<<<<<<<";
         file_put_contents('logs/wx_event.log',$log_str,FILE_APPEND);
     }
 
-
-
+    /**
+     * 客服处理
+     */
+    public function keFu($openid,$from){
+        $xml_response = '<xml><ToUserName><![CDATA['.$openid.']]></ToUserName><FromUserName><![CDATA['.$from.']]></FromUserName><CreateTime>'.time().'</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA['. 'Hello World, 现在时间'. date('Y-m-d H:i:s') .']]></Content></xml>';
+        echo $xml_response;
+    }
 
     /**
      * 接收事件推送
@@ -160,7 +169,7 @@ class WeixinController extends Controller
                 ],[
                     "type"  => "view",      // view类型 跳转指定 URL
                     "name"  => "jd",
-                    "url"   => "https://www.jd.com"
+                    "url"   => "kefu01"
                 ]
             ]
         ];

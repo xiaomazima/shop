@@ -7,7 +7,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 use Illuminate\Support\Facades\Redis;
-
+use Symfony\Component\HttpKernel\Tests\Bundle\GuessedNameBundle;
+use GuzzleHttp
 class WeixinController extends Controller
 {
     //
@@ -150,7 +151,6 @@ class WeixinController extends Controller
 
         //2 请求微信接口
         $client = new GuzzleHttp\Client(['base_uri' => $url]);
-
         $data = [
             "button"    => [
                 [

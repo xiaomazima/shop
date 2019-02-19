@@ -50,6 +50,18 @@ class WeixinController extends Controller
         $event = $xml->Event;                       //事件类型
 //        var_dump($xml);echo '<hr>';die;
         $openid = $xml->FromUserName;               //用户openid
+
+        //处理用户发送信息
+        if(isset($xml->MsgType)){
+            if($xml->MsgType=='text'){
+                $msg=$xml->Content;
+                $xml_response = '<xml><ToUserName><![CDATA['.$openid.']]></ToUserName><FromUserName><![CDATA['.$xml->ToUserName.']]></FromUserName><CreateTime>'.time().'</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA[你好啊！欢迎来到小麻子这里，有什么问题尽管提]]></Content></xml>';
+                echo $xml_response;
+                exit();
+            }
+        }
+
+
         if($event=='subscribe'){
             $sub_time = $xml->CreateTime;               //扫码关注时间
 
@@ -162,12 +174,27 @@ class WeixinController extends Controller
             "button"    => [
                 [
                     "type"  => "view",      // view类型 跳转指定 URL
-                    "name"  => "xiaomai",
+                    "name"  => "小麻子",
                     "url"   => "https://www.baidu.com"
-                ],[
-                    "type"  => "click",      // view类型 跳转指定 URL
-                    "name"  => "kefu01",
+                ],
+                [
+                    "type"  => "click",      // click类型
+                    "name"  => "点击这里",
                     "key"   => "kefu01"
+                ],
+                [
+                    "name"=>"嘻嘻嘻",
+                    "sub_button"=> [
+                        [
+                            "type"=>"view",
+                            "name"=>"哈哈哈❤",
+                             "url"=>"http://www.soso.com/"
+                        ],[
+                            "type"=>"view",
+                            "name"=>"嘻嘻嘻❤",
+                            "url"=>"http://www.soso.com/"
+                        ]
+                    ]
                 ]
             ]
         ];

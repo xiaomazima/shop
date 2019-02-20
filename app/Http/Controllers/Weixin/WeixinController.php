@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 use Illuminate\Support\Facades\Redis;
+use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpKernel\Tests\Bundle\GuessedNameBundle;
 use GuzzleHttp;
 class WeixinController extends Controller

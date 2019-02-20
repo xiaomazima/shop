@@ -119,7 +119,16 @@ class WeixinController extends Controller
         $response = $client->get($url);
         //获取文件名
         $file_info=$response->getHeader('Content-disposition');
-        var_dump($file_info);
+        $file_name = substr(rtrim($file_info[0],'"'),-20);
+
+        $wx_image_path = 'wx/images/'.$file_name;
+        //保存图片
+        $r = Storage::disk('local')->put($wx_image_path,$response->getBody());
+        if($r){     //保存成功
+            //echo 'OK';
+        }else{      //保存失败
+            //echo 'NO';
+        }
     }
 
 

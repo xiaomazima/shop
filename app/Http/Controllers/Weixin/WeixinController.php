@@ -120,12 +120,18 @@ class WeixinController extends Controller
      * 下载图片素材
      */
     public function media($media_id){
-        $url='https://api.weixin.qq.com/cgi-bin/media/get?access_token='.$this->getWXAccessToken().'&media_id='.$media_id;
+        $url = 'https://api.weixin.qq.com/cgi-bin/media/get?access_token='.$this->getWXAccessToken().'&media_id='.$media_id;
+        //echo $url;echo '</br>';
+
         //保存图片
         $client = new GuzzleHttp\Client();
         $response = $client->get($url);
+        //$h = $response->getHeaders();
+        //echo '<pre>';print_r($h);echo '</pre>';die;
+
         //获取文件名
-        $file_info=$response->getHeader('Content-disposition');
+        $file_info = $response->getHeader('Content-disposition');
+
         $file_name = substr(rtrim($file_info[0],'"'),-20);
 
         $wx_image_path = 'wx/images/'.$file_name;
@@ -136,6 +142,7 @@ class WeixinController extends Controller
         }else{      //保存失败
             //echo 'NO';
         }
+
     }
 
 

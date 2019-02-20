@@ -155,7 +155,7 @@ class WeixinController extends Controller
     /**
      * 下载语音文件
      */
-    public function voice()
+    public function voice($media_id)
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/media/get?access_token='.$this->getWXAccessToken().'&media_id='.$media_id;
 

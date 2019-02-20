@@ -18,8 +18,8 @@ class WeixinController extends Controller
 
     public function test()
     {
-        //echo __METHOD__;
-        //$this->getWXAccessToken();
+//        echo __METHOD__;
+       echo $this->getWXAccessToken();
         $this->getUserInfo(1);
     }
 

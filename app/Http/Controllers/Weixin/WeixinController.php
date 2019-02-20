@@ -48,6 +48,12 @@ class WeixinController extends Controller
         //解析XML
         $xml = simplexml_load_string($data);        //将 xml字符串 转换成对象
 
+       //记录日志
+        $log_str = date('Y-m-d H:i:s') . "\n" . $data . "\n<<<<<<<";
+        file_put_contents('logs/wx_event.log',$log_str,FILE_APPEND);
+
+
+
         $event = $xml->Event;                       //事件类型
 //        var_dump($xml);echo '<hr>';die;
         $openid = $xml->FromUserName;               //用户openid
@@ -65,8 +71,9 @@ class WeixinController extends Controller
                     $xml_response = '<xml><ToUserName><![CDATA['.$openid.']]></ToUserName><FromUserName><![CDATA['.$xml->ToUserName.']]></FromUserName><CreateTime>'.time().'</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA['. date('Y-m-d H:i:s') .']]></Content></xml>';
                     echo $xml_response;
                 }
-            }
-        }
+            }elseif($xml->MsgType=='voice'){        //处理语音信息
+                $this->voice($xml->MediaId);
+            }elseif($xml->MsgType=='event'){        //判断事件类型
 
 
         if($event=='subscribe'){
@@ -101,11 +108,10 @@ class WeixinController extends Controller
         }elseif($event='CLICK'){
             if($xml->EventKey=='kefu01'){
             $this->keFu($openid,$xml->ToUserName);
-        }
-    }
-
-        $log_str = date('Y-m-d H:i:s') . "\n" . $data . "\n<<<<<<<";
-        file_put_contents('logs/wx_event.log',$log_str,FILE_APPEND);
+                     }
+                 }
+            }
+         }
     }
 
     /**
@@ -143,6 +149,32 @@ class WeixinController extends Controller
             //echo 'NO';
         }
 
+    }
+
+
+    /**
+     * 下载语音文件
+     */
+    public function voice()
+    {
+        $url = 'https://api.weixin.qq.com/cgi-bin/media/get?access_token='.$this->getWXAccessToken().'&media_id='.$media_id;
+
+        $client = new GuzzleHttp\Client();
+        $response = $client->get($url);
+        //$h = $response->getHeaders();
+        //echo '<pre>';print_r($h);echo '</pre>';die;
+        //获取文件名
+        $file_info = $response->getHeader('Content-disposition');
+        $file_name = substr(rtrim($file_info[0],'"'),-20);
+
+        $wx_image_path = 'wx/voice/'.$file_name;
+        //保存图片
+        $r = Storage::disk('local')->put($wx_image_path,$response->getBody());
+        if($r){     //保存成功
+
+        }else{      //保存失败
+
+        }
     }
 
 
@@ -257,6 +289,15 @@ class WeixinController extends Controller
 
 
 
+    }
+
+    /**
+     * 刷新access_token
+     */
+    public function refreshToken()
+    {
+        Redis::del($this->redis_weixin_access_token);
+        echo $this->getWXAccessToken();
     }
 
 }

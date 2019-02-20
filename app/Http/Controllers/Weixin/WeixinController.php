@@ -53,12 +53,18 @@ class WeixinController extends Controller
 
         //处理用户发送信息
         if(isset($xml->MsgType)){
-            if($xml->MsgType=='text'){
+            if($xml->MsgType=='text'){ //用户发送文本消息
                 $msg=$xml->Content;
                 $xml_response = '<xml><ToUserName><![CDATA['.$openid.']]></ToUserName><FromUserName><![CDATA['.$xml->ToUserName.']]></FromUserName><CreateTime>'.time().'</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA[你好啊！欢迎来到小麻子这里，有什么问题尽管提]]></Content></xml>';
                 echo $xml_response;
-                exit();
             }
+        }elseif($xml->MsgType=='image'){       //用户发送图片信息
+                //视业务需求是否需要下载保存图片
+                if(1){  //下载图片素材
+                    $this->dlWxImg($xml->MediaId);
+                    $xml_response = '<xml><ToUserName><![CDATA['.$openid.']]></ToUserName><FromUserName><![CDATA['.$xml->ToUserName.']]></FromUserName><CreateTime>'.time().'</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA['. date('Y-m-d H:i:s') .']]></Content></xml>';
+                    echo $xml_response;
+                }
         }
 
 

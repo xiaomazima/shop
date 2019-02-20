@@ -110,6 +110,20 @@ class WeixinController extends Controller
     }
 
     /**
+     * 下载图片素材
+     */
+    public function media($media_id){
+        $url='https://api.weixin.qq.com/cgi-bin/media/get?access_token='.$this->getWXAccessToken().'&media_id='.$media_id;
+        //保存图片
+        $client = new GuzzleHttp\Client();
+        $response = $client->get($url);
+        //获取文件名
+        $file_info=$response->getHeader('Content-disposition');
+        var_dump($file_info);
+    }
+
+
+    /**
      * 接收事件推送
      */
     public function validToken()

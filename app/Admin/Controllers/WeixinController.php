@@ -88,7 +88,7 @@ class WeixinController extends Controller
         $grid->nickname('Nickname');
         $grid->sex('Sex');
         $grid->headimgurl('Headimgurl')->display(function($bbb){
-            return '<img src="https://xmz.rps0228.cn/wx/images/'.$bbb.'">';
+            return "<img src=".$bbb.">";
         });
         $grid->subscribe_time('Subscribe time');
 

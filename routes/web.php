@@ -114,3 +114,4 @@ Route::post('/weixin/valid1','Weixin\WeixinController@wxEvent');        //接收
 Route::post('/weixin/valid','Weixin\WeixinController@validToken');
 
 Route::get('/createMenu','Weixin\WeixinController@createMenu');     //创建菜单
+Route::get('/weixin/refresh_token','Weixin\WeixinController@refreshToken');     //刷新token

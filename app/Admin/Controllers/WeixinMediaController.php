@@ -4,6 +4,7 @@ namespace App\Admin\Controllers;
 
 use App\Model\WeixinMedia;
 use App\Http\Controllers\Controller;
+use App\Model\WeixinMedias;
 use Encore\Admin\Controllers\HasResourceActions;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
@@ -169,7 +170,7 @@ class WeixinMediaController extends Controller
      * @param $file_path
      * 上传素材
      */
-    public function upMaterialTest($file_path)
+    public function upMaterialTest($file_path,$file_name)
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/material/add_material?access_token='.$this->getWXAccessToken().'&type=image';
         $client = new GuzzleHttp\Client();
@@ -185,7 +186,18 @@ class WeixinMediaController extends Controller
         $body = $response->getBody();
         echo $body;echo '<hr>';
         $d = json_decode($body,true);
-        echo '<pre>';print_r($d);echo '</pre>';
+        $d['file_name']=$file_name;
+        $d['add_time']=time();
+
+        $data=WeixinMedias::insertGetId($d);
+          if($data){
+                    echo '成功';
+         }else{
+                    echo '失败';
+                }
+
+
+//        echo '<pre>';print_r($d);echo '</pre>';
 
 
     }
@@ -217,6 +229,11 @@ class WeixinMediaController extends Controller
 
     }
 
+    /**
+     * @param Content $content
+     * @return Content
+     * 上传素材视图页面
+     */
     public function formShow(Content $content)
     {
         return $content
@@ -226,6 +243,10 @@ class WeixinMediaController extends Controller
 
     }
 
+    /**
+     * @param Request $request
+     * 执行上传
+     */
     public function formTest(Request $request)
     {
         //echo '<pre>';print_r($_POST);echo '</pre>';echo '<hr>';
@@ -250,10 +271,10 @@ class WeixinMediaController extends Controller
         //保存文件
         $save_file_path = $request->media->storeAs('form_test',$new_file_name);       //返回保存成功之后的文件路径
 
-        echo 'save_file_path: '.$save_file_path;echo '<hr>';
+      //  echo 'save_file_path: '.$save_file_path;echo '<hr>';
 
         //上传至微信永久素材
-        $this->upMaterialTest($save_file_path);
+        $this->upMaterialTest($save_file_path,$new_file_name);
 
 
     }

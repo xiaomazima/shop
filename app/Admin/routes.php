@@ -17,4 +17,7 @@ Route::group([
     $router->resource('/send',WeixinSendController::class);
     $router->post('/','WeixinSendController@sendAll');
 
+
+    $router->get('/formshow','WeixinMediaController@formShow');//永久素材
+    $router->post('/formshow','WeixinMediaController@formTest');
 });

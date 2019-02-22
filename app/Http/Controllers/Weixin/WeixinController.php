@@ -314,5 +314,20 @@ class WeixinController extends Controller
         Redis::del($this->redis_weixin_access_token);
         echo $this->getWXAccessToken();
     }
-
+    /**
+     * 消息群发
+     */
+    public function sendAll(){
+        $url="https://api.weixin.qq.com/cgi-bin/message/mass/send?access_token='.$this->getWXAccessToken().'";
+        //2 请求微信接口
+        $client = new GuzzleHttp\Client(['base_uri' => $url]);
+        $data=[
+            "touser"=>[
+                "OPENID1",
+                "OPENID2"
+            ],
+    "msgtype"=> "text",
+    "text"=>["content"=> "hello from boxer."]
+];
+    }
 }

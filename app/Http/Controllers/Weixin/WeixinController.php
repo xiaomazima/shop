@@ -66,12 +66,15 @@ class WeixinController extends Controller
                 $msg=$xml->Content;
                 $xml_response = '<xml><ToUserName><![CDATA['.$openid.']]></ToUserName><FromUserName><![CDATA['.$xml->ToUserName.']]></FromUserName><CreateTime>'.time().'</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA[你好啊！欢迎来到小麻子这里，有什么问题尽管提]]></Content></xml>';
                 echo $xml_response;
+                $user_info = $this->getUserInfo($openid);
+
+
                 //将用户发送的消息写入数据库
                 $data=[
                     'openid'    => $openid,
                     'add_time'=>time(),
                     'message'=>$msg,
-                    'headimgurl' =>$msg['headimgurl']
+                    'headimgurl' =>$user_info['headimgurl']
                 ];
                 $w_message=WeixinMessage::insertGetId($data);
                 var_dump($w_message);

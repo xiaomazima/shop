@@ -6,7 +6,7 @@
 @foreach($info as $v)
     <table>
         <tr>
-            <td>{{$name}}</td>
+            <td><h4>{{$name}}:</h4></td>
             <td>{{$v['message']}}</td>
         </tr>
     </table>

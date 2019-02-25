@@ -11,7 +11,7 @@
     @foreach($info as $v)
 
         <tr>
-            <td><h4>{{$name}}:</h4></td>
+            <td><h3>{{$name}}:</h3></td>
             <td>{{$v['message']}}</td>
         </tr>
 

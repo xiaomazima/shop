@@ -3,7 +3,14 @@
 <h2><img src="{{$img}}" alt=""></h2>
 
 <div class="chat" id="chat_div">
-
+@foreach($info as $v)
+    <table>
+        <tr>
+            <td>{{$name}}</td>
+            <td>{{$v['message']}}</td>
+        </tr>
+    </table>
+   @endforeach
 </div>
 <hr>
 

@@ -2,6 +2,7 @@
 
 namespace App\Admin\Controllers;
 
+use App\Model\WeixinMessage;
 use App\Model\WeixinUser;
 use App\Http\Controllers\Controller;
 use Encore\Admin\Controllers\HasResourceActions;
@@ -145,9 +146,12 @@ class WeixinController extends Controller
     public function weiService(Content $content){
         $headimgurl=$_GET['url'];
         $img=WeixinUser::where(['headimgurl'=>$headimgurl])->first();
+        //查用户信息表
+        $user_message=WeixinMessage::where(['headimgurl'=>$headimgurl])->get();
         $data=[
             'name'=>$img['nickname'],
-            'img'=>$img['headimgurl']
+            'img'=>$img['headimgurl'],
+            'info'=>$user_message
         ];
 
 //        print_r($img);

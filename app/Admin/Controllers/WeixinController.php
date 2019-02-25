@@ -85,6 +85,9 @@ class WeixinController extends Controller
         $grid->id('Id');
         $grid->uid('Uid');
         $grid->openid('Openid');
+//            ->display(function($openid){
+//            return '<a href="weiService?openid='.$openid.'">'.$openid.'</a>';
+//        });
         $grid->add_time('Add time');
         $grid->nickname('Nickname');
         $grid->sex('Sex');
@@ -144,6 +147,7 @@ class WeixinController extends Controller
      * 微信客服
      */
     public function weiService(Content $content){
+//        $openid=$_GET['openid'];
         $headimgurl=$_GET['url'];
         $img=WeixinUser::where(['headimgurl'=>$headimgurl])->first();
         //查用户信息表

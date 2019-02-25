@@ -70,7 +70,8 @@ class WeixinController extends Controller
                 $data=[
                     'openid'    => $openid,
                     'add_time'=>time(),
-                    'message'=>$msg
+                    'message'=>$msg,
+                    'headimgurl' =>$msg['headimgurl']
                 ];
                 $w_message=WeixinMessage::insertGetId($data);
                 var_dump($w_message);

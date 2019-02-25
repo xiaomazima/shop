@@ -20,5 +20,9 @@ Route::group([
 
     $router->get('/formshow','WeixinMediaController@formShow');//永久素材
     $router->post('/formshow','WeixinMediaController@formTest');
+    //客服聊天
     $router->get('/weiService','WeixinController@weiService');
+     $router->post('/touser','WeixinController@touser');
+
+    $router->post('/massage','WeixinController@massage');
 });

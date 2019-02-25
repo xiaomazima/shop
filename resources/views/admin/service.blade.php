@@ -54,12 +54,12 @@
                    {openid:openid},
                    function(msg){
                        for(var i in msg['data']){
-                           _tr+="<h3>"+
+                           _tr+=
                                        "<tr>" +
-                                           "<td>"+msg['name']+"</td>" +
+                                           "<td>"+"<h3>"+msg['name']+":"+"</h3>"+"</td>" +
                                            "<td>"+msg['data'][i]['message']+"</td>" +
-                                       "</tr>"+
-                                   "</h3>"
+                                       "</tr>"
+
                        }
                        $('#show').html(_tr);
                    },'json'

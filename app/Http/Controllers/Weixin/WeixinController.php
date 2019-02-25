@@ -72,7 +72,7 @@ class WeixinController extends Controller
                     'add_time'=>time(),
                     'message'=>$msg
                 ];
-                $w_message=WeixinMessage::insterGetId($data);
+                $w_message=WeixinMessage::insertGetId($data);
                 var_dump($w_message);
             }elseif($xml->MsgType=='image'){       //用户发送图片信息
                 //视业务需求是否需要下载保存图片

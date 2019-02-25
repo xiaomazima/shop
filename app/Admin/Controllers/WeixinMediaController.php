@@ -251,7 +251,6 @@ class WeixinMediaController extends Controller
     {
         //echo '<pre>';print_r($_POST);echo '</pre>';echo '<hr>';
         //echo '<pre>';print_r($_FILES);echo '</pre>';echo '<hr>';
-
         //保存文件
         $img_file = $request->file('media');
         //echo '<pre>';print_r($img_file);echo '</pre>';echo '<hr>';
@@ -260,7 +259,6 @@ class WeixinMediaController extends Controller
         echo 'originName: '.$img_origin_name;echo '</br>';
         $file_ext = $img_file->getClientOriginalExtension();          //获取文件扩展名
         echo 'ext: '.$file_ext;echo '</br>';
-
         //重命名
         $new_file_name = str_random(15). '.'.$file_ext;
         echo 'new_file_name: '.$new_file_name;echo '</br>';

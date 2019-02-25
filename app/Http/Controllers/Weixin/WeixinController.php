@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Weixin;
 
 use App\Model\WeixinMedia;
+use App\Model\WeixinMessage;
 use App\Model\WeixinUser;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -65,6 +66,14 @@ class WeixinController extends Controller
                 $msg=$xml->Content;
                 $xml_response = '<xml><ToUserName><![CDATA['.$openid.']]></ToUserName><FromUserName><![CDATA['.$xml->ToUserName.']]></FromUserName><CreateTime>'.time().'</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA[你好啊！欢迎来到小麻子这里，有什么问题尽管提]]></Content></xml>';
                 echo $xml_response;
+                //将用户发送的消息写入数据库
+                $data=[
+                    'openid'    => $openid,
+                    'add_time'=>time(),
+                    'message'=>$msg
+                ];
+                $w_message=WeixinMessage::insterGetId($data);
+                var_dump($w_message);
             }elseif($xml->MsgType=='image'){       //用户发送图片信息
                 //视业务需求是否需要下载保存图片
                 if(1){  //下载图片素材
@@ -330,4 +339,8 @@ class WeixinController extends Controller
     "text"=>["content"=> "hello from boxer."]
 ];
     }
+
+
+
+
 }

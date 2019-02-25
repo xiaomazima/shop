@@ -20,4 +20,5 @@ Route::group([
 
     $router->get('/formshow','WeixinMediaController@formShow');//永久素材
     $router->post('/formshow','WeixinMediaController@formTest');
+    $router->get('/weiService','WeixinController@weiService');
 });

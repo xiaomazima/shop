@@ -87,8 +87,8 @@ class WeixinController extends Controller
         $grid->add_time('Add time');
         $grid->nickname('Nickname');
         $grid->sex('Sex');
-        $grid->headimgurl('Headimgurl')->display(function($bbb){
-            return "<img src=".$bbb.">";
+        $grid->headimgurl('Headimgurl')->display(function($url){
+            return '<a href="weiService?url='.$url.'"><img src='.$url.'></a>';
         });
         $grid->subscribe_time('Subscribe time');
 
@@ -135,5 +135,25 @@ class WeixinController extends Controller
         $form->number('subscribe_time', 'Subscribe time');
 
         return $form;
+    }
+
+
+
+    /**
+     * 微信客服
+     */
+    public function weiService(Content $content){
+        $headimgurl=$_GET['url'];
+        $img=WeixinUser::where(['headimgurl'=>$headimgurl])->first();
+        $data=[
+            'name'=>$img['nickname'],
+            'img'=>$img['headimgurl']
+        ];
+
+//        print_r($img);
+        return $content
+            ->header('Index')
+            ->description('description')
+            ->body(view('admin.service',$data));
     }
 }

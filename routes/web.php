@@ -115,3 +115,8 @@ Route::post('/weixin/valid','Weixin\WeixinController@validToken');
 
 Route::get('/createMenu','Weixin\WeixinController@createMenu');     //创建菜单
 Route::get('/weixin/refresh_token','Weixin\WeixinController@refreshToken');     //刷新token
+
+
+//微信支付
+Route::get('/weixin/pay/test','Weixin\PayController@test');     //微信支付测试
+Route::post('/weixin/pay/notice','Weixin\PayController@notice');     //微信支付通知回调

@@ -53,7 +53,46 @@
                    "massage",
                    {openid:openid},
                    function(msg){
-                       for(var i in msg['data']){
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+for(var i in msg['data']){
                            _tr+=
                                        "<tr>" +
                                            "<td>"+"<h3>"+msg['name']+":"+"</h3>"+"</td>" +
@@ -65,7 +104,7 @@
                    },'json'
            )
        };
-
+//计时器
        var a =setInterval(function(){
            clear();
        },1000*3)

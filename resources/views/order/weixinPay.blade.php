@@ -33,7 +33,9 @@
                 "/success",
                 {order_sn:order_sn},
                 function(msg){
-                  console.log(msg);
+                  if(msg=='支付成功'){
+                      location.href='/win';
+                  }
                 }
         )
 

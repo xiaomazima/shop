@@ -83,8 +83,10 @@ class PayController extends Controller
             echo '支付失败';
         }
     }
-
-
+//
+    public function win(){
+        echo '支付成功';
+    }
     protected function ToXml()
     {
         if(!is_array($this->values)

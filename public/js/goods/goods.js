@@ -17,6 +17,7 @@ $("#add_cart_btn").click(function(e){
             }else{
                 alert(d.msg);
             }
+            console.log(d);
         }
     });
 });

@@ -71,30 +71,30 @@ Route::get('/test/check_cookie','Test\TestController@checkCookie')->middleware('
 
 
 //购物车
-Route::get('/cart','Cart\IndexController@index')->middleware('check.login.token');//购物车页面
+Route::get('/cart','Cart\IndexController@index');//购物车页面
 //商品添加购物车
-Route::get('/add/{goods_id}','Cart\IndexController@add')->middleware('check.login.token');
+Route::get('/add/{goods_id}','Cart\IndexController@add');
 //商品删除
-Route::get('/del/{goods_id}','Cart\IndexController@del')->middleware('check.login.token');
+Route::get('/del/{goods_id}','Cart\IndexController@del');
 Route::get('/clist','Cart\IndexController@clist');//商品详情（自己）
 Route::get('/goodsList/{goods_id}','Goods\IndexController@goodsList');//商品详情
 //添加购物车
-Route::post('/cartAdd','Cart\IndexController@cartAdd')->middleware('check.login.token');
-Route::get('/cartDel/{goods_id}','Cart\IndexController@cartDel')->middleware('check.login.token');
+Route::post('/cartAdd','Cart\IndexController@cartAdd');
+Route::get('/cartDel/{goods_id}','Cart\IndexController@cartDel');
 
 //下单
 Route::get('/orderAdd','Order\IndexController@orderAdd');
 Route::get('/orderList','Order\IndexController@orderList');
 
 //结算
-Route::any('/orderPay/{id}','Order\IndexController@orderPay')->middleware('check.login.token');
-Route::any('/orderDel/{id}','Order\IndexController@orderDel')->middleware('check.login.token');
+Route::any('/orderPay/{id}','Order\IndexController@orderPay');
+Route::any('/orderDel/{id}','Order\IndexController@orderDel');
 
 
 //支付
 //Route::get('/pay/alipay/test','Pay\AlipayController@test');         //测试
 //Route::get('/pay/o/{oid}','Pay\IndexController@order')->middleware('check.login.token');         //订单支付
-Route::get('/pay/o/{oid}','Pay\AlipayController@pay')->middleware('check.login.token');
+Route::get('/pay/o/{oid}','Pay\AlipayController@pay');
 Route::post('/pay/alipay/notify','Pay\AlipayController@aliNotify');        //支付宝支付 异步通知回调
 Route::get('/pay/alipay/return','Pay\AlipayController@aliReturn');        //支付宝支付 同步通知回调
 
@@ -118,5 +118,7 @@ Route::get('/weixin/refresh_token','Weixin\WeixinController@refreshToken');     
 
 
 //微信支付
-Route::get('/weixin/pay/test','Weixin\PayController@test');     //微信支付测试
+Route::post('/success','Weixin\PayController@success');
+Route::get('/deciphering/{url}','Weixin\PayController@deciphering');//解密
+Route::get('/weixin/pay/test/{order_sn}','Weixin\PayController@test');     //微信支付测试
 Route::post('/weixin/pay/notice','Weixin\PayController@notice');     //微信支付通知回调

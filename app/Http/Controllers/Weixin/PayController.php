@@ -14,13 +14,15 @@ class PayController extends Controller
     public $weixin_unifiedorder_url = 'https://api.mch.weixin.qq.com/pay/unifiedorder';
     public $weixin_notify_url = 'https://xmz.rps0228.cn/weixin/pay/notice';     //支付通知回调
 
-    public function test()
+    public function test($order_sn)
     {
 
 
         //
         $total_fee = 1;         //用户要支付的总金额
-        $order_id = OrderModel::generateOrderSN();
+
+        //订单号
+        setcookie('order_sn',$order_sn,time()+3600,'/','',false,true);
 
         $order_info = [
             'appid'         =>  env('WEIXIN_APPID_0'),      //微信支付绑定的服务号的APPID
@@ -28,7 +30,7 @@ class PayController extends Controller
             'nonce_str'     => str_random(16),             // 随机字符串
             'sign_type'     => 'MD5',
             'body'          => '测试订单-'.mt_rand(1111,9999) . str_random(6),
-            'out_trade_no'  => $order_id,                       //本地订单号
+            'out_trade_no'  => $order_sn,                       //本地订单号
             'total_fee'     => $total_fee,
             'spbill_create_ip'  => $_SERVER['REMOTE_ADDR'],     //客户端IP
             'notify_url'    => $this->weixin_notify_url,        //通知回调地址
@@ -54,12 +56,32 @@ class PayController extends Controller
 //		echo 'result_code: '.$data->result_code;echo '<br>';
 //		echo 'prepay_id: '.$data->prepay_id;echo '<br>';
 //		echo 'trade_type: '.$data->trade_type;echo '<br>';
-        echo 'code_url: '.$data->code_url;echo '<br>';
+       $code_url=$data->code_url;
+        $url=base64_encode($code_url);
+        header("Refresh:0;url='/deciphering/$url'");
 //        die;
         //echo '<pre>';print_r($data);echo '</pre>';
 
         //将 code_url 返回给前端，前端生成 支付二维码
 
+    }
+//解密
+    public function deciphering($url){
+        $code_url=base64_decode($url);
+        $order_sn=$_COOKIE['order_sn'];
+        return view('order.weixinPay',['code_url'=>$code_url,'order_sn'=>$order_sn]);
+
+    }
+
+// 支付成功
+    public function success(Request $request){
+       $order_sn= $request->input('order_sn');
+        $arr=OrderModel::where(['order_sn'=>$order_sn])->first();
+        if($arr==2){
+            echo '支付成功';
+        }else{
+            echo '支付失败';
+        }
     }
 
 
@@ -178,7 +200,16 @@ class PayController extends Controller
 
             if($sign){       //签名验证成功
                 //TODO 逻辑处理  订单状态更新
-
+                $order_sn=$xml->out_trade_no;
+                $data=[
+                    'add_time'=>time(),
+                    'is_pay'=>2,
+                    'is_delete'=>2,
+                    'plat_oid'=>$xml->trasaction_id,
+                    'plat'=>2
+                ];
+                $res=OrderModel::where(['order_sn'=>$order_sn])->update($data);
+                var_dump($res);
             }else{
                 //TODO 验签失败
                 echo '验签失败，IP: '.$_SERVER['REMOTE_ADDR'];

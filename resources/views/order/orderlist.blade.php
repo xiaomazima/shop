@@ -24,6 +24,7 @@
                         @elseif($v['is_pay']==2)
                             <a href="" class="btn btn-success ">已结算|查看物流</a>
                         @endif
+                        <a href="/weixin/pay/test/{{$v['order_sn']}}" class="btn btn-info" >微信支付</a>
                         <a href="/orderDel/{{$v['id']}}" class="btn btn-info" >取消订单</a>
                     </td>
                 </tr>

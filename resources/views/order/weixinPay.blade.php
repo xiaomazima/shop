@@ -14,7 +14,7 @@
 
 @endsection
 
-<script src="{{URL::asset('/js/jquery-1.12.4.min.js')}}"></script>
+{{--<script src="{{URL::asset('/js/jquery-1.12.4.min.js')}}"></script>--}}
 <script src="{{URL::asset('/js/jquery-3.2.1.min.js')}}"></script>
 <script>
     $(function(){
@@ -28,21 +28,21 @@
             height:200, //高度
             text:code_url //任意内容
         });
-    });
-    var clear =function(){
+    var clear11 =function(){
+        //alert(2222);
         $.post(
                 "/success",
                 {order_sn:order_sn},
                 function(msg){
-                  if(msg==1){
-                      alert('支付成功');
-                  }
+                    if(msg==1){
+                        alert('支付成功');
+                    }
                 }
         )
-
     };
     //计时器
     var a =setInterval(function(){
-        clear();
+        clear11();
     },1000*3)
+    });
 </script>

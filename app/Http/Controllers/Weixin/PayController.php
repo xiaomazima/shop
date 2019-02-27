@@ -203,6 +203,7 @@ class PayController extends Controller
                 $order_sn=$xml->out_trade_no;
                 $data=[
                     'pay_time'=>time(),
+                    'u_id' => session()->get('uid'),
                     'is_pay'=>2,
                     'is_delete'=>2,
                     'plat_oid'=>$xml->transaction_id,

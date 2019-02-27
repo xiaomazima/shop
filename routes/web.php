@@ -118,8 +118,8 @@ Route::get('/weixin/refresh_token','Weixin\WeixinController@refreshToken');     
 
 
 //微信支付
-Route::get('/win','Weixin\PayController@win');
 Route::post('/success','Weixin\PayController@success');
 Route::get('/deciphering/{url}','Weixin\PayController@deciphering');//解密
 Route::get('/weixin/pay/test/{order_sn}','Weixin\PayController@test');     //微信支付测试
 Route::post('/weixin/pay/notice','Weixin\PayController@notice');     //微信支付通知回调
+Route::get('/win','Weixin\PayController@win');

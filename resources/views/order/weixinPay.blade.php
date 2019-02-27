@@ -28,21 +28,18 @@
             text:code_url //任意内容
         });
     });
-    var clear=function(){
+    var clear =function(){
         $.post(
                 "/success",
                 {order_sn:order_sn},
                 function(msg){
                   if(msg==1){
-                      location.href='/win';
+                      alert('支付成功');
                   }
                 }
         )
 
     };
-
-
-
     //计时器
     var a =setInterval(function(){
         clear();

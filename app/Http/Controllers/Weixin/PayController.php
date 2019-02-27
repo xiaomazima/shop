@@ -202,10 +202,10 @@ class PayController extends Controller
                 //TODO 逻辑处理  订单状态更新
                 $order_sn=$xml->out_trade_no;
                 $data=[
-                    'add_time'=>time(),
+                    'pay_time'=>time(),
                     'is_pay'=>2,
                     'is_delete'=>2,
-                    'plat_oid'=>$xml->trasaction_id,
+                    'plat_oid'=>$xml->transaction_id,
                     'plat'=>2
                 ];
                 $res=OrderModel::where(['order_sn'=>$order_sn])->update($data);

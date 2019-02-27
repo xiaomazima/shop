@@ -15,6 +15,7 @@
 @endsection
 
 <script src="{{URL::asset('/js/jquery-1.12.4.min.js')}}"></script>
+<script src="{{URL::asset('/js/jquery-3.2.1.min.js')}}"></script>
 <script>
     $(function(){
         $.ajaxSetup({headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}});

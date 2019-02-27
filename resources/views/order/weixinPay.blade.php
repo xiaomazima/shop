@@ -35,7 +35,7 @@
                 {order_sn:order_sn},
                 function(msg){
                     if(msg==1){
-                        alert('支付成功');
+                        location.href='/win';
                     }
                 }
         )

@@ -196,14 +196,13 @@ class PayController extends Controller
 
         if($xml->result_code=='SUCCESS' && $xml->return_code=='SUCCESS'){      //微信支付成功回调
             //验证签名
-            $sign = true;
+           $sign=$this->atteStation($xml);
 
             if($sign){       //签名验证成功
                 //TODO 逻辑处理  订单状态更新
                 $order_sn=$xml->out_trade_no;
                 $data=[
                     'pay_time'=>time(),
-                    'u_id' => session()->get('uid'),
                     'is_pay'=>2,
                     'is_delete'=>2,
                     'plat_oid'=>$xml->transaction_id,
@@ -225,4 +224,17 @@ class PayController extends Controller
     }
 
 
+    /**
+     * 验签
+     */
+    public function atteStation($xml)  {
+        $this->values = [];
+        $this->values = $xml;
+        $setSign=$this->SetSign();
+        if($setSign==$xml->sign){
+            return true;
+         }else{
+            return false;
+        }
+    }
 }

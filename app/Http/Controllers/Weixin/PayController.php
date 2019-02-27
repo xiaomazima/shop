@@ -78,9 +78,9 @@ class PayController extends Controller
        $order_sn= $request->input('order_sn');
         $arr=OrderModel::where(['order_sn'=>$order_sn])->first();
         if($arr['is_pay']==2){
-            echo '支付成功';
+            echo 1;
         }else{
-            echo '支付失败';
+            echo 2;
         }
     }
 //

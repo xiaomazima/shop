@@ -123,3 +123,8 @@ Route::get('/deciphering/{url}','Weixin\PayController@deciphering');//解密
 Route::get('/weixin/pay/test/{order_sn}','Weixin\PayController@test');     //微信支付测试
 Route::post('/weixin/pay/notice','Weixin\PayController@notice');     //微信支付通知回调
 Route::get('/win','Weixin\PayController@win');
+
+
+//微信登录
+Route::get('/weixin/login','Weixin\WeixinController@login');        //微信登录
+Route::get('/weixin/getcode','Weixin\WeixinController@code');        //接收code

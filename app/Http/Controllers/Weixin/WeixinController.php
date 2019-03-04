@@ -353,7 +353,9 @@ class WeixinController extends Controller
     {
         return view('weixin.login');
     }
-
+    /**
+     * 接收code
+     */
     public function code(){
 //        echo __METHOD__;die;
         //1 回调拿到 code (用户确认登录后 微信会跳 redirect )
@@ -377,7 +379,15 @@ class WeixinController extends Controller
         $user_arr = json_decode($user_json,true);
         echo '<hr>';
         echo '<pre>';print_r($user_arr);echo '</pre>';
-        //return $this->info($user_arr);
+        return $this->info($user_arr);
+    }
+
+    /**
+     * 入数据库
+     */
+    public function info($user_arr){
+        $u = WeixinUser::where(['unionid'=>$user_arr['unionid']])->first();
+        var_dump($u);
     }
 
 }

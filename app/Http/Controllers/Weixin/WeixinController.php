@@ -355,7 +355,7 @@ class WeixinController extends Controller
     }
 
     public function code(){
-        echo __METHOD__;die;
+//        echo __METHOD__;die;
         //1 回调拿到 code (用户确认登录后 微信会跳 redirect )
         print_r($_GET);echo '<hr/>';
         //获取code

@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpKernel\Tests\Bundle\GuessedNameBundle;
 use GuzzleHttp;
+use App\Model\PuserModel;
 class WeixinController extends Controller
 {
     //
@@ -387,7 +388,33 @@ class WeixinController extends Controller
      */
     public function info($user_arr){
         $u = WeixinUser::where(['unionid'=>$user_arr['unionid']])->first();
-        var_dump($u);
+//        var_dump($u);
+        if($u){
+            echo '登陆成功';
+
+        }else{
+            // 添加用户表
+            $u_data = [
+                'user_name'  => $user_arr['nickname'],
+            ];
+
+            $uid = PuserModel::insertGetId($u_data);
+
+            //添加微信用户表
+            $wx_u_data = [
+                'uid'       => $uid,
+                'openid'    =>$user_arr['openid'],
+                'nickname'  => $user_arr['nickname'],
+                'add_time'  => time(),
+                'sex'       => $user_arr['sex'],
+                'headimgurl'    => $user_arr['headimgurl'],
+                'unionid'   => $user_arr['unionid']
+            ];
+
+            $wx_id = WeixinUser::insertGetId($wx_u_data);
+
+            // 登录
+        }
     }
 
 }

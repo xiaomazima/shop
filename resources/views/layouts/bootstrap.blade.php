@@ -53,7 +53,7 @@
 </div>
 
 @section('footer')
-    <script src="http://res2.wx.qq.com/open/js/jweixin-1.4.0.js"></script>
+    <script src="https://res2.wx.qq.com/open/js/jweixin-1.4.0.js"></script>
     <script src="{{URL::asset('/js/jquery-3.2.1.min.js')}}"></script>
     <script src="{{URL::asset('/bootstrap/js/bootstrap.min.js')}}"></script>
     <script src="{{URL::asset('/js/jquery.qrcode.min.js')}}"></script>

@@ -129,6 +129,7 @@ class WeixinController extends Controller
                     'sex'               => $user_info['sex'],
                     'headimgurl'        => $user_info['headimgurl'],
                     'subscribe_time'    => $sub_time,
+                    'blacklist'            =>2
                 ];
 
                 $id = WeixinUser::insertGetId($user_data);      //保存用户信息

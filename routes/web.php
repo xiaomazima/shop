@@ -137,7 +137,11 @@ Route::get('/weixin/jssdk/test','Weixin\WeixinController@jssdkTest');       // �
 
 
 
+
+
 //获取access_token
 Route::get('/Accesstoken','XweiXinController@Accesstoken');
-
+//展示用户列表
 Route::get('/UserList','XweiXinController@UserList');
+//加入黑名单
+Route::any('/blacklist/{id}','XweiXinController@blacklist');

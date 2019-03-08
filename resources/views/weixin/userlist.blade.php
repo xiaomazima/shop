@@ -16,11 +16,15 @@
                     <td>{{$v['id']}}</td>
                     <td>{{$v['nickname']}}</td>
                     <td>{{date('Y-m-d H:i:s',$v['add_time'])}}</td>
-                    <td>@if($v['is_pay']==1)
-                            <a href="/pay/o/{{$v['order_sn']}}" class="btn btn-info ">结算</a>
-                        @elseif($v['is_pay']==2)
-                            <a href="" class="btn btn-success ">已结算|查看物流</a></td>
-                    @endif
+                    <td>
+                        @if($v['blacklist']==2)
+                            <a href="/blacklist/{{$v['id']}}">加入黑名单</a>
+                        @elseif($v['blacklist']==1)
+                            <a href="" class="btn btn-success ">已加入黑名单</a>
+                        @endif
+
+                    </td>
+
                 </tr>
             @endforeach
         </table>

@@ -85,6 +85,7 @@ class XweixinController extends Controller
                             'sex' => $user_info['sex'],
                             'headimgurl' => $user_info['headimgurl'],
                             'subscribe_time' => $sub_time,
+                            'blacklist'=>2
                         ];
 
                         $id = WeixinUser::insertGetId($user_data);      //保存用户信息
@@ -104,6 +105,19 @@ class XweixinController extends Controller
 //       print_r($data);
        return view('weixin.userlist',['arr'=>$data]);
    }
+
+    //加入黑名单
+    public function blacklist($id){
+        $where=[
+          'blacklist'=>1
+        ];
+        $res=WeixinUser::where(['id'=>$id])->update($where);
+        if($res){
+            echo '加入黑名单成功';
+        }else{
+            echo '失败';
+        }
+    }
 
 
 

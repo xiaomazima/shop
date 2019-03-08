@@ -65,7 +65,7 @@ class WeixinController extends Controller
         if(isset($xml->MsgType)){
             if($xml->MsgType=='text'){ //用户发送文本消息
                 $msg=$xml->Content;
-                $xml_response = '<xml><ToUserName><![CDATA['.$openid.']]></ToUserName><FromUserName><![CDATA['.$xml->ToUserName.']]></FromUserName><CreateTime>'.time().'</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA[你好啊！欢迎来到小麻子这里，有什么问题尽管提]]></Content></xml>';
+                $xml_response = '<xml><ToUserName><![CDATA['.$openid.']]></ToUserName><FromUserName><![CDATA['.$xml->ToUserName.']]></FromUserName><CreateTime>'.time().'</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA[你好啊！欢迎来到小麻子公众号]]></Content></xml>';
                 echo $xml_response;
                 $user_info = $this->getUserInfo($openid);
 

@@ -139,5 +139,5 @@ Route::get('/weixin/jssdk/test','Weixin\WeixinController@jssdkTest');       // �
 
 //获取access_token
 Route::get('/Accesstoken','XweiXinController@Accesstoken');
-Route::get('/WxUser','XweiXinController@WxUser');
 
+Route::get('/UserList','XweiXinController@UserList');

@@ -133,3 +133,11 @@ Route::get('/weixin/getcode','Weixin\WeixinController@code');        //接收cod
 //微信 JSSDK
 
 Route::get('/weixin/jssdk/test','Weixin\WeixinController@jssdkTest');       // 测试
+
+
+
+
+//获取access_token
+Route::get('/Accesstoken','XweiXinController@Accesstoken');
+Route::get('/WxUser','XweiXinController@WxUser');
+

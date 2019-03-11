@@ -136,7 +136,7 @@ class WeixinController extends Controller
                 $url='www.baidu.com';
                 $picurl='http://mmbiz.qpic.cn/mmbiz_jpg/C2YxcLaiaqn8MgTAZoRv29jx9j9ofLsTmlM3utEMqupdpZmnIFZK5jpw5M6YGWRj6u4VF6PowInr4XIKbIw3NLw/0';
 
-                $image_text='<xml>
+                $shop='<xml>
          <ToUserName><![CDATA['.$FromUserName.']]></ToUserName>
         <FromUserName><![CDATA['.$ToUserName.']]></FromUserName>
         <CreateTime>'.time().'</CreateTime>
@@ -151,7 +151,7 @@ class WeixinController extends Controller
                                            </item>
                                   </Articles>
                            </xml>';
-                echo $image_text;
+                echo $shop;
 
 
 

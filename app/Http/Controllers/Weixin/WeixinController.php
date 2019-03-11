@@ -63,7 +63,7 @@ class WeixinController extends Controller
 
         //处理用户发送信息
         if(isset($xml->MsgType)){
-            if($xml->Content=='图文'){ //用户发送文本消息
+            if($xml->Content=='图文消息'){ //用户发送文本消息
 //                $msg=$xml->Content;
 //                $xml_response = '<xml><ToUserName><![CDATA['.$openid.']]></ToUserName><FromUserName><![CDATA['.$xml->ToUserName.']]></FromUserName><CreateTime>'.time().'</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA[你好啊！欢迎来到小麻子公众号]]></Content></xml>';
 //                echo $xml_response;
@@ -102,9 +102,8 @@ class WeixinController extends Controller
                                            </item>
                                   </Articles>
                            </xml>';
-
                 echo $image_text;
-            }elseif($xml->MsgType=='image'){       //用户发送图片信息
+         }elseif($xml->MsgType=='image'){       //用户发送图片信息
                 //视业务需求是否需要下载保存图片
                 if(1){  //下载图片素材
                     $file_name=$this->media($xml->MediaId);

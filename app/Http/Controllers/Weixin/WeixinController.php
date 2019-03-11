@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Weixin;
 
+use App\Model\ShopGoods;
 use App\Model\WeixinMedia;
 use App\Model\WeixinMessage;
 use App\Model\WeixinUser;
@@ -125,6 +126,33 @@ class WeixinController extends Controller
                     var_dump($m_id);
                 }
             }elseif($xml->MsgType=='text'){
+                $name=$xml->Content;
+                $data=ShopGoods::where(['goods_name'=>$name])->first()->toArray();
+
+                $FromUserName=$xml->FromUserName;
+                $ToUserName=$xml->ToUserName;
+                $Title=$data['goods_name'];
+                $Description=$data['describe'];
+                $url='www.baidu.com';
+                $picurl='http://mmbiz.qpic.cn/mmbiz_jpg/C2YxcLaiaqn8MgTAZoRv29jx9j9ofLsTmlM3utEMqupdpZmnIFZK5jpw5M6YGWRj6u4VF6PowInr4XIKbIw3NLw/0';
+
+                $image_text='<xml>
+         <ToUserName><![CDATA['.$FromUserName.']]></ToUserName>
+        <FromUserName><![CDATA['.$ToUserName.']]></FromUserName>
+        <CreateTime>'.time().'</CreateTime>
+        <MsgType><![CDATA[news]]></MsgType>
+          <ArticleCount>1</ArticleCount>
+            <Articles>
+                <item>
+                     <Title><![CDATA['.$Title.']]></Title>
+                           <Description><![CDATA['.$Description.']]></Description>
+                                 <PicUrl><![CDATA['.$picurl.']]></PicUrl>
+                                       <Url><![CDATA['.$url.']]></Url>
+                                           </item>
+                                  </Articles>
+                           </xml>';
+                echo $image_text;
+
 
 
             }elseif($xml->MsgType=='voice'){        //处理语音信息

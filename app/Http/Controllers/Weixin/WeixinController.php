@@ -104,9 +104,6 @@ class WeixinController extends Controller
                            </xml>';
 
                 echo $image_text;
-
-
-
             }elseif($xml->MsgType=='image'){       //用户发送图片信息
                 //视业务需求是否需要下载保存图片
                 if(1){  //下载图片素材

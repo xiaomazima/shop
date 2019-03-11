@@ -63,22 +63,50 @@ class WeixinController extends Controller
 
         //处理用户发送信息
         if(isset($xml->MsgType)){
-            if($xml->MsgType=='text'){ //用户发送文本消息
-                $msg=$xml->Content;
-                $xml_response = '<xml><ToUserName><![CDATA['.$openid.']]></ToUserName><FromUserName><![CDATA['.$xml->ToUserName.']]></FromUserName><CreateTime>'.time().'</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA[你好啊！欢迎来到小麻子公众号]]></Content></xml>';
-                echo $xml_response;
-                $user_info = $this->getUserInfo($openid);
+            if($xml->Content=='图文消息'){ //用户发送文本消息
+//                $msg=$xml->Content;
+//                $xml_response = '<xml><ToUserName><![CDATA['.$openid.']]></ToUserName><FromUserName><![CDATA['.$xml->ToUserName.']]></FromUserName><CreateTime>'.time().'</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA[你好啊！欢迎来到小麻子公众号]]></Content></xml>';
+//                echo $xml_response;
+//                $user_info = $this->getUserInfo($openid);
+//
+//
+//                //将用户发送的消息写入数据库
+//                $data=[
+//                    'openid'    => $openid,
+//                    'add_time'=>time(),
+//                    'message'=>$msg,
+//                    'headimgurl' =>$user_info['headimgurl']
+//                ];
+//                $w_message=WeixinMessage::insertGetId($data);
+//                var_dump($w_message);
+
+                $FromUserName=$xml->FromUserName;
+                $ToUserName=$xml->ToUserName;
+                $Title='你好';
+                $Description='我叫小麻子';
+                $url='www.baidu.com';
+                $picurl='http://mmbiz.qpic.cn/mmbiz_jpg/C2YxcLaiaqn8MgTAZoRv29jx9j9ofLsTmlM3utEMqupdpZmnIFZK5jpw5M6YGWRj6u4VF6PowInr4XIKbIw3NLw/0';
+
+                $image_text='<xml>
+         <ToUserName><![CDATA['.$FromUserName.']]></ToUserName>
+        <FromUserName><![CDATA['.$ToUserName.']]></FromUserName>
+        <CreateTime>'.time().'</CreateTime>
+        <MsgType><![CDATA[news]]></MsgType>
+          <ArticleCount>1</ArticleCount>
+            <Articles>
+                <item>
+                     <Title><![CDATA['.$Title.']]></Title>
+                           <Description><![CDATA['.$Description.']]></Description>
+                                 <PicUrl><![CDATA['.$picurl.']]></PicUrl>
+                                       <Url><![CDATA['.$url.']]></Url>
+                                           </item>
+                                  </Articles>
+                           </xml>';
+
+                echo $image_text;
 
 
-                //将用户发送的消息写入数据库
-                $data=[
-                    'openid'    => $openid,
-                    'add_time'=>time(),
-                    'message'=>$msg,
-                    'headimgurl' =>$user_info['headimgurl']
-                ];
-                $w_message=WeixinMessage::insertGetId($data);
-                var_dump($w_message);
+
             }elseif($xml->MsgType=='image'){       //用户发送图片信息
                 //视业务需求是否需要下载保存图片
                 if(1){  //下载图片素材
@@ -100,6 +128,9 @@ class WeixinController extends Controller
                     $m_id = WeixinMedia::insertGetId($data);
                     var_dump($m_id);
                 }
+            }elseif($xml->MsgType=='text'){
+
+
             }elseif($xml->MsgType=='voice'){        //处理语音信息
                 $this->voice($xml->MediaId);
             }elseif($xml->MsgType=='event'){        //判断事件类型

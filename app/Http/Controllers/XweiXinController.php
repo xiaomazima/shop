@@ -74,7 +74,6 @@ class XweixinController extends Controller
 
                     //保存用户信息
                     $u = WeixinUser::where(['openid' => $openid])->first();
-                    //var_dump($u);die;
                     if ($u) {       //用户不存在
                         echo '用户已存在';
                     } else {
@@ -127,7 +126,6 @@ class XweixinController extends Controller
      */
     public function getUserInfo($openid)
     {
-//        $openid = 'oLreB1jAnJFzV_8AGWUZlfuaoQto';
         $access_token = $this->Accesstoken();
         $url = 'https://api.weixin.qq.com/cgi-bin/user/info?access_token='.$access_token.'&openid='.$openid.'&lang=zh_CN';
 
